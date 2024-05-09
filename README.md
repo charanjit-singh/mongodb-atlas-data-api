@@ -58,6 +58,7 @@ All functions available in API are available in the client as well. The followin
 - `updateMany`
 - `deleteOne`
 - `deleteMany`
+- `aggregate`
 
 ## Options
 

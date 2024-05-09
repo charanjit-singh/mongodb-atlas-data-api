@@ -1,0 +1,25 @@
+name: Build and Publish
+run-name: Build and Publish
+on:
+  push:
+    branches:
+      - main
+# Build and publish the package to npm
+# Also use semantic release to create a release and publish it to GitHub and bump the version before publishing to npm
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # Setup .npmrc file to publish to npm
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+          registry-url: "https://registry.npmjs.org"
+      - run: npm i -g pnpm
+      - run: pnpm install
+      - run: pnpm build
+      - run: npx semantic-release --branches main
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
