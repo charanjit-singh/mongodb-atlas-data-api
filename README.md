@@ -1,80 +1,89 @@
-## @
+# Mongodb Atlas Data API Client
 
-This generator creates TypeScript/JavaScript client that utilizes fetch-api.
+This library is a wrapper around the Mongodb Atlas Data API. It is designed to make it easier to interact with the API from a Node.js application.
 
-### Building
+Mongodb atlas data api can be accessed using the following link: [Mongodb Atlas Data API](https://www.mongodb.com/docs/atlas/app-services/data-api/openapi/)
 
-To build and compile the typescript sources to javascript use:
-```
-npm install
-npm run build
-```
+## Installation
 
-### Publishing
-
-First build the package then run ```npm publish```
-
-### Consuming
-
-Navigate to the folder of your consuming project and run one of the following commands.
-
-_published:_
-
-```
-npm install @ --save
+```bash
+npm install mongodb-atlas-data-api
+# Or
+pnpm install mongodb-atlas-data-api
+# Or
+yarn add mongodb-atlas-data-api
 ```
 
-_unPublished (not recommended):_
+## Usage
 
+You can specify `dataSource`, `collection`, and `database` in the constructor of the `AtlasApi` class. You can override these values in the method calls as well.
+
+```typescript
+import "dotenv/config";
+import { AtlasApi } from "mongodb-atlas-data-api";
+const atlasApiClient = new AtlasApi({
+  basePath: process.env.ATLAS_BASE_PATH,
+  auth: {
+    type: "apiKey",
+    apiKey: process.env.ATLAS_API_KEY as string,
+  },
+  dataSource: "Cluster0",
+  collection: "", // collection name,
+  database: "", // database name,
+});
+
+const run = async () => {
+  const response = await atlasApiClient.find({
+    findManyRequestBody: {
+      filter: {
+        firstName: "test",
+      },
+    },
+  });
+  console.log(response);
+};
+
+run();
 ```
-npm install PATH_TO_GENERATED_PACKAGE --save
-```
 
-### Usage
+## Methods
 
-Below code snippet shows exemplary usage of the configuration and the API based 
-on the typical `PetStore` example used for OpenAPI. 
+All functions available in API are available in the client as well. The following methods are available in the client:
 
-```
-import * as your_api from 'your_api_package'
+- `find`
+- `findOne`
+- `insertOne`
+- `insertMany`
+- `updateOne`
+- `updateMany`
+- `deleteOne`
+- `deleteMany`
 
-// Covers all auth methods included in your OpenAPI yaml definition
-const authConfig: your_api.AuthMethodsConfiguration = {
-    "api_key": "YOUR_API_KEY"
-}
+## Options
 
-// Implements a simple middleware to modify requests before (`pre`) they are sent
-// and after (`post`) they have been received 
-class Test implements your_api.Middleware {
-    pre(context: your_api.RequestContext): Promise<your_api.RequestContext> {
-        // Modify context here and return
-        return Promise.resolve(context);
-    }
+Explore the [Mongodb Atlas Data API](https://www.mongodb.com/docs/atlas/app-services/data-api/openapi/) to see the options available for each method.
 
-    post(context: your_api.ResponseContext): Promise<your_api.ResponseContext> {
-        return Promise.resolve(context);
-    }
+Intellisense is available for the options in the client as well.
 
-}
+# Why use this library?
 
-// Create configuration parameter object
-const configurationParameters = {
-    httpApi: new your_api.JQueryHttpLibrary(), // Can also be ignored - default is usually fine
-    baseServer: your_api.servers[0], // First server is default
-    authMethods: authConfig, // No auth is default
-    promiseMiddleware: [new Test()],
-}
+You can use this library to interact with the Mongodb Atlas Data API from your Node.js application. This library provides a simple interface to interact with the API. 
 
-// Convert to actual configuration
-const config = your_api.createConfiguration(configurationParameters);
+This can be useful in the following scenarios:
 
-// Use configuration with your_api
-const api = new your_api.PetApi(config);
-your_api.Pet p = new your_api.Pet();
-p.name = "My new pet";
-p.photoUrls = [];
-p.tags = [];
-p.status = "available";
-Promise<your_api.Pet> createdPet = api.addPet(p);
+1. NextJs applications for edge runtime data fetching.
+2. Serverless applications where you don't want to manage a database connection.
+3. Applications where you want to interact with the database without exposing the connection string.
+4. [Read Mode](https://www.mongodb.com/docs/atlas/app-services/data-api/)
 
-```
+# Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+## License
+
+MIT
+
+# Author
+
+Created by [Charanjit Singh](https://github.com/charanjit-singh)

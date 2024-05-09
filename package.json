@@ -1,11 +1,11 @@
 {
-  "name": "atlas-api-client",
+  "name": "mongodb-atlas-data-api",
   "version": "0.0.1",
   "description": "OpenAPI client for MongoDB Atlas Data API",
   "author": "Charanjit Singh <charanjitdotsingh@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/charanjit-singh/atlas-api-client.git"
+    "url": "git+https://github.com/charanjit-singh/mongodb-atlas-data-api.git"
   },
   "keywords": [
     "atlas",
@@ -29,13 +29,17 @@
     "build": "tsc",
     "prepare": "npm run build"
   },
-  "dependencies": {
-    "whatwg-fetch": "^3.0.0",
-    "es6-promise": "^4.2.4",
-    "url-parse": "^1.4.3"
-  },
   "devDependencies": {
-    "typescript": "^4.0",
-    "@types/url-parse": "1.4.4"
+    "@types/node": "^20.12.11",
+    "dotenv": "^16.4.5",
+    "tsx": "^4.9.3",
+    "typescript": "^5.4.5"
+  },
+  "bugs": {
+    "url": "https://github.com/charanjit-singh/mongodb-atlas-data-api/issues"
+  },
+  "homepage": "https://github.com/charanjit-singh/mongodb-atlas-data-api#readme",
+  "directories": {
+    "example": "examples"
   }
 }
