@@ -1,7 +1,7 @@
 {
   "name": "mongodb-atlas-data-api",
   "version": "0.0.1",
-  "description": "OpenAPI client for MongoDB Atlas Data API",
+  "description": "A wrapper around the Mongodb Atlas Data API to make it easier to interact with the API from a Node.js application.",
   "author": "Charanjit Singh <charanjitdotsingh@gmail.com>",
   "repository": {
     "type": "git",
@@ -17,22 +17,21 @@
   ],
   "license": "MIT",
   "main": "./dist/index.js",
-  "type": "commonjs",
-  "exports": {
-    ".": {
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.js"
-    }
-  },
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "typings": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsup",
     "prepare": "npm run build"
   },
   "devDependencies": {
     "@types/node": "^20.12.11",
     "dotenv": "^16.4.5",
     "semantic-release": "^23.0.8",
+    "tsup": "^8.0.2",
     "tsx": "^4.9.3",
     "typescript": "^5.4.5"
   },
