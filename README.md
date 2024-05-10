@@ -1,3 +1,4 @@
+![NPM Downloads](https://img.shields.io/npm/dm/mongodb-atlas-data-api)
 # Mongodb Atlas Data API Client
 
 This library is a wrapper around the Mongodb Atlas Data API. It is designed to make it easier to interact with the API from a Node.js application.
